@@ -32,10 +32,18 @@ if (productImages.length === 0) productImages.push('/favicon.png');
 // 1. HOME PAGE (Scrollable)
 const Home = ({ setPage }) => {
   const [prodIndex, setProdIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const id = setInterval(() => setProdIndex(i => (i + 1) % productImages.length), 4000);
     return () => clearInterval(id);
+  }, []);
+
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth < 768);
+    onResize();
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
   }, []);
 
   const prev = () => setProdIndex(i => (i - 1 + productImages.length) % productImages.length);
@@ -85,10 +93,10 @@ const Home = ({ setPage }) => {
 
     {/* Product Placeholder Section */}
     <section style={{ ...styles.section, backgroundColor: '#020617' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }}>
-        <div style={{ ...styles.card, minHeight: '400px', background: '#020617', position: 'relative', overflow: 'hidden' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '4rem', alignItems: 'center' }}>
+        <div style={{ ...styles.card, minHeight: isMobile ? '250px' : '400px', height: isMobile ? '250px' : 'auto', background: '#020617', position: 'relative', overflow: 'hidden' }}>
           <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <img src={productImages[prodIndex]} alt={`Product ${prodIndex + 1}`} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 12, display: 'block' }} />
+            <img src={productImages[prodIndex]} alt={`Product ${prodIndex + 1}`} style={{ width: '100%', height: '100%', maxHeight: isMobile ? '250px' : '100%', objectFit: 'cover', borderRadius: 12, display: 'block' }} />
             <button onClick={prev} aria-label="Previous image" style={{ position: 'absolute', top: '50%', left: 12, transform: 'translateY(-50%)', background: 'rgba(0,0,0,0.5)', color: '#fff', border: 'none', width: 44, height: 44, borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>‹</button>
             <button onClick={next} aria-label="Next image" style={{ position: 'absolute', top: '50%', right: 12, transform: 'translateY(-50%)', background: 'rgba(0,0,0,0.5)', color: '#fff', border: 'none', width: 44, height: 44, borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>›</button>
           </div>
