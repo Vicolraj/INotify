@@ -1,44 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+
 :root {
   --primary: #ed1c24;
   --bg: #050505;
   --glass: rgba(255, 255, 255, 0.03);
-  --border: rgba(255, 255, 255, 0.1);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+* {
+  margin: 0; padding: 0; box-sizing: border-box;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
 
 body {
-  background-color: var(--bg);
+  background: var(--bg);
   color: white;
   overflow-x: hidden;
 }
 
-/* SLEEK GLASS CARD */
-.glass-card {
+.glass {
   background: var(--glass);
-  backdrop-filter: blur(15px);
-  border: 1px solid var(--border);
-  border-radius: 24px;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* MAD ANIMATIONS */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
+.text-gradient {
+  background: linear-gradient(to right, #fff, #ed1c24);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-15px); }
-  100% { transform: translateY(0px); }
-}
-
-@keyframes glow {
-  0% { box-shadow: 0 0 5px rgba(237, 28, 36, 0.2); }
-  50% { box-shadow: 0 0 20px rgba(237, 28, 36, 0.5); }
-  100% { box-shadow: 0 0 5px rgba(237, 28, 36, 0.2); }
-}
-
-.reveal { animation: fadeInUp 0.8s ease-out forwards; }
-.floating { animation: float 4s ease-in-out infinite; }
-.btn-glow { animation: glow 2s infinite; }
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #050505; }
+::-webkit-scrollbar-thumb { background: #ed1c24; border-radius: 10px; }
