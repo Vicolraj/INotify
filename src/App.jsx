@@ -105,7 +105,9 @@ const Home = ({ setPage }) => {
       </div>
     </section>
   </div>
-);
+  );
+
+};
 
 // 2. AUTH PAGES (Login & Signup)
 const Auth = ({ type, setPage, login }) => (
@@ -126,9 +128,7 @@ const Auth = ({ type, setPage, login }) => (
       </p>
     </motion.div>
   </div>
-  );
-
-};
+);
 
 // 3. DASHBOARD
 const Dashboard = ({ setPage }) => {
